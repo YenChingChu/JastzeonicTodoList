@@ -13,9 +13,9 @@ class TodoModel {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 
-    var todoTitle = ""
-
     var todoContent = ""
+
+    var todoDescription = ""
 
     var isFinished = false
 }

@@ -25,8 +25,8 @@ class ContentViewModel(application: Application) : AndroidViewModel(application)
 
             if (todoModels.isNotEmpty()) {
                 val todoModel = todoModels.first()
-                content.set(todoModel.todoTitle)
-                description.set(todoModel.todoContent)
+                content.set(todoModel.todoContent)
+                description.set(todoModel.todoDescription)
             }
 
         }, {})
@@ -38,8 +38,8 @@ class ContentViewModel(application: Application) : AndroidViewModel(application)
 
         val model = TodoModel()
         if (content.get() != null && description.get() != null) {
-            model.todoTitle = content.get()!!
-            model.todoContent = description.get()!!
+            model.todoContent = content.get()!!
+            model.todoDescription = description.get()!!
         } else {
             return
         }

@@ -31,8 +31,8 @@ class TodoListAdapter(private val context: Context, private val todoList: List<T
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.todoContent.text = todoList[position].todoTitle
-        holder.todoDescription.text = todoList[position].todoContent
+        holder.todoContent.text = todoList[position].todoContent
+        holder.todoDescription.text = todoList[position].todoDescription
     }
 
 
