@@ -1,19 +1,27 @@
 package jastzeonic.com.jastzeonictodolist.view
 
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import jastzeonic.com.jastzeonictodolist.ContentActivity
+import jastzeonic.com.jastzeonictodolist.TodoEditActivity
 import jastzeonic.com.jastzeonictodolist.R
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 
-class TodoListAdapter(private val context: Context, private val todoList: List<TodoModel>) : RecyclerView.Adapter<TodoViewHolder>() {
+class TodoListAdapter(private val context: Context) : RecyclerView.Adapter<TodoViewHolder>() {
+
+
+    val onDeleteEvent = MutableLiveData<Long>()
+    val onClickEvent = MutableLiveData<Long>()
+
+    var todoList: MutableList<TodoModel> = ArrayList()
 
 
     interface AdapterOnClickListener {
         fun onClick(position: Int)
+        fun onItemLongClick(position: Int)
     }
 
 
@@ -26,7 +34,6 @@ class TodoListAdapter(private val context: Context, private val todoList: List<T
     }
 
     override fun getItemCount(): Int {
-
         return todoList.size
     }
 
@@ -39,12 +46,18 @@ class TodoListAdapter(private val context: Context, private val todoList: List<T
     private val adapterClickListener = object : AdapterOnClickListener {
         override fun onClick(position: Int) {
 
-            val intent = Intent(context, ContentActivity::class.java)
-            intent.putExtra(ContentActivity.TODO_ITEM_ID, todoList[position].id)
-            context.startActivity(intent)
+            onClickEvent.value = todoList[position].id
+        }
 
+        override fun onItemLongClick(position: Int) {
+
+            onDeleteEvent.value = todoList[position].id
+
+            todoList.removeAt(position)
+            notifyItemRemoved(position)
 
         }
+
 
     }
 

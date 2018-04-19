@@ -8,13 +8,13 @@ import jastzeonic.com.jastzeonictodolist.RepositoryProvider
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 import jastzeonic.com.jastzeonictodolist.model.TodoRepository
 
-class ContentViewModel(application: Application) : AndroidViewModel(application) {
+class TodoEditViewModel(application: Application) : AndroidViewModel(application) {
 
     val onDeleteEvent = MutableLiveData<Boolean>()
     val onInsertEvent = MutableLiveData<Boolean>()
 
 
-    var repo: TodoRepository = RepositoryProvider.getDatabaseRepository(TodoRepository::class.java)
+    private val repo: TodoRepository = RepositoryProvider.getDatabaseRepository(TodoRepository::class.java)
     val content = ObservableField<String>()
     val description = ObservableField<String>()
     var todoId = -1L
@@ -45,7 +45,7 @@ class ContentViewModel(application: Application) : AndroidViewModel(application)
         }
 
 
-        repo.insert(model).subscribe({ onSuccess -> onInsertEvent.value = onSuccess > 0 }, {})
+        repo.insert(model).subscribe({ onSuccess -> onInsertEvent.value = onSuccess > 0 }, { onError -> })
     }
 
     fun deleteTodoModel() {

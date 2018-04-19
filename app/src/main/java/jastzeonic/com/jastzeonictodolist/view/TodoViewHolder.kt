@@ -13,9 +13,13 @@ class TodoViewHolder(view: View, adapterOnClickListener: TodoListAdapter.Adapter
 
     init {
         view.setOnClickListener {
-        adapterOnClickListener.onClick(adapterPosition)
+            adapterOnClickListener.onClick(adapterPosition)
 
         }
+        view.setOnLongClickListener({
+            adapterOnClickListener.onItemLongClick(adapterPosition)
+            true
+        })
     }
 
 
