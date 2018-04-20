@@ -25,7 +25,7 @@ class RepositoryProvider {
                 result.init(applicationContext)
                 repositoryStore[DEFAULT_KEY + ":" + modelClass.canonicalName] = result
             } else {
-                throw IllegalStateException("Database already init. why are you do that again?")
+                throw IllegalStateException("Database already init. why are you do that again?") as Throwable
             }
 
 

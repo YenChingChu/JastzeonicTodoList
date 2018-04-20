@@ -13,7 +13,7 @@ class TodoEditActivity : AppCompatActivity() {
         const val TODO_ITEM_ID = "todo_item_id"
     }
 
-    lateinit var todoEditViewModel: TodoEditViewModel
+    private lateinit var todoEditViewModel: TodoEditViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -21,10 +21,9 @@ class TodoEditViewModel(application: Application) : AndroidViewModel(application
 
     fun getTodoModel(id: Long) {
 
-        repo.getItemById(id).subscribe({ todoModels ->
+        repo.getItemById(id).subscribe({ todoModel ->
 
-            if (todoModels.isNotEmpty()) {
-                val todoModel = todoModels.first()
+            if (todoModel != null) {
                 content.set(todoModel.todoContent)
                 description.set(todoModel.todoDescription)
             }

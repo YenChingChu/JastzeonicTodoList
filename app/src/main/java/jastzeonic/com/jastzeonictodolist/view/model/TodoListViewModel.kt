@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
+import android.util.Log
 import jastzeonic.com.jastzeonictodolist.RepositoryProvider
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 import jastzeonic.com.jastzeonictodolist.model.TodoRepository
@@ -21,7 +22,7 @@ class TodoListViewModel(application: Application) : AndroidViewModel(application
 
 
     fun getTodoList() {
-        repo.getAll().subscribe({ todoList -> todoListObservable.set(todoList) }, {})
+        repo.getAll().subscribe({ todoList -> todoListObservable.set(todoList) }, { onError -> Log.d("####", "onError:" + onError.message.toString()) })
     }
 
 

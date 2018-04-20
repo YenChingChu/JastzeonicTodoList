@@ -23,7 +23,9 @@ class TodoRepository : RepositoryProvider.DatabaseRepository {
         }
 
         AsyncTask.execute({
-            todoDatabase = Room.databaseBuilder(applicationContext, TodoDatabase::class.java, TodoDatabase.DATABASE_NAME).build()
+            todoDatabase = Room.databaseBuilder(applicationContext, TodoDatabase::class.java, TodoDatabase.DATABASE_NAME)
+                    .addMigrations(TodoDatabase.MIGRATION_1_2, TodoDatabase.MIGRATION_2_3)
+                    .build()
             todoDao = todoDatabase.getTodoDao()
         })
 
@@ -39,7 +41,7 @@ class TodoRepository : RepositoryProvider.DatabaseRepository {
     }
 
 
-    fun getItemById(id: Long): Flowable<List<TodoModel>> {
+    fun getItemById(id: Long): Flowable<TodoModel> {
         return Flowable.fromCallable({ todoDao.queryById(id) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
