@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
+
         @JvmStatic
         @BindingAdapter("todoList")
         fun setTodoList(recyclerView: RecyclerView, todoList: ObservableField<List<TodoModel>>) {
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
                 adapter.todoList = ArrayList()
                 adapter.todoList.addAll(todoList.get() ?: ArrayList())
                 adapter.notifyDataSetChanged()
+
+
+
             }
         }
     }
