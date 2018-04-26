@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="todoEditViewModel"
-            type="jastzeonic.com.jastzeonictodolist.view.model.TodoEditViewModel" />
+            name="todoViewModel"
+            type="jastzeonic.com.jastzeonictodolist.view.model.TodoViewModel" />
 
 
         <import type="android.support.v7.app.AppCompatActivity" />
@@ -32,7 +32,7 @@
             android:ems="10"
             android:hint="@string/todo_content"
             android:inputType="text"
-            android:text="@={todoEditViewModel.content}"
+            android:text="@={todoViewModel.content}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
             android:gravity="top"
             android:hint="@string/todo_description"
             android:inputType="textMultiLine"
-            android:text="@={todoEditViewModel.description}"
+            android:text="@={todoViewModel.description}"
             app:layout_constraintBottom_toTopOf="@+id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
             android:background="@drawable/bg_onclick_effect"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{v -> todoEditViewModel.addTodoModel()}"
+            android:onClick="@{v -> todoViewModel.addTodoModel()}"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

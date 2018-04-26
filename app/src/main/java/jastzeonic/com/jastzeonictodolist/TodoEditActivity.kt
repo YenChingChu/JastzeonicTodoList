@@ -6,38 +6,38 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import jastzeonic.com.jastzeonictodolist.databinding.ActivityContentBinding
-import jastzeonic.com.jastzeonictodolist.view.model.TodoEditViewModel
+import jastzeonic.com.jastzeonictodolist.view.model.TodoViewModel
 
 class TodoEditActivity : AppCompatActivity() {
     companion object {
         const val TODO_ITEM_ID = "todo_item_id"
     }
 
-    private lateinit var todoEditViewModel: TodoEditViewModel
+    private lateinit var todoViewModel: TodoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        todoEditViewModel = ViewModelProviders.of(this).get(TodoEditViewModel::class.java)
+        todoViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
         val binding = DataBindingUtil.setContentView<ActivityContentBinding>(this, R.layout.activity_content)
-        binding.todoEditViewModel = todoEditViewModel
+        binding.todoViewModel = todoViewModel
         setContentView(binding.root)
 
         val id = intent.getLongExtra(TODO_ITEM_ID, -1)
         if (id != -1L) {
-            todoEditViewModel.getTodoModel(id)
-            todoEditViewModel.todoId = id
+            todoViewModel.getTodoModel(id)
+            todoViewModel.todoId = id
         }
         initViewModelEvent()
     }
 
     private fun initViewModelEvent() {
-        todoEditViewModel.onInsertEvent.observe(this, Observer { isSuccess ->
+        todoViewModel.onInsertEvent.observe(this, Observer { isSuccess ->
             if (isSuccess != null && isSuccess) {
                 finish()
             }
         })
 
-        todoEditViewModel.onDeleteEvent.observe(this, Observer { isSuccess ->
+        todoViewModel.onDeleteEvent.observe(this, Observer { isSuccess ->
             if (isSuccess != null && isSuccess) {
                 finish()
             }

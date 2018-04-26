@@ -18,7 +18,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".TodoEditActivity" />
-        <activity android:name=".SampleDatabindingActivity"></activity>
+        <activity android:name=".SampleDatabindingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

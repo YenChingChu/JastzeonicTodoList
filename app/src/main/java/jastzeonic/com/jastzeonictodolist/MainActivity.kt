@@ -15,6 +15,7 @@ import jastzeonic.com.jastzeonictodolist.databinding.ActivityMainBinding
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 import jastzeonic.com.jastzeonictodolist.view.TodoListAdapter
 import jastzeonic.com.jastzeonictodolist.view.model.TodoListViewModel
+import jastzeonic.com.jastzeonictodolist.view.model.TodoViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,13 +36,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private lateinit var todoListViewModel: TodoListViewModel
+    private lateinit var todoListViewModel: TodoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        todoListViewModel = ViewModelProviders.of(this).get(TodoListViewModel::class.java)
+        todoListViewModel = ViewModelProviders.of(this).get(TodoViewModel::class.java)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        binding.todoListViewModel = todoListViewModel
+        binding.todoViewModel = todoListViewModel
 
 
         binding.todoList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

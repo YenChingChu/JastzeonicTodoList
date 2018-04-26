@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="todoListViewModel"
-            type="jastzeonic.com.jastzeonictodolist.view.model.TodoListViewModel" />
+            name="todoViewModel"
+            type="jastzeonic.com.jastzeonictodolist.view.model.TodoViewModel" />
     </data>
 
 
@@ -21,7 +21,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/todo_list"
-            todoList="@{todoListViewModel.todoListObservable}"
+            todoList="@{todoViewModel.todoListObservable}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

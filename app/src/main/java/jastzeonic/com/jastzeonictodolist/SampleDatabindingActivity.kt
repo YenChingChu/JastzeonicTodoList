@@ -15,6 +15,8 @@ class SampleDatabindingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        title = "Data Binding Demo"
+
         viewModel = ViewModelProviders.of(this).get(SampleViewModel::class.java)
 
         val binding = DataBindingUtil.setContentView<ActivitySampleDatabindingBinding>(this, R.layout.activity_sample_databinding)
