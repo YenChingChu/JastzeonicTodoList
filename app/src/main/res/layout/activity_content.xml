@@ -10,11 +10,11 @@
             type="jastzeonic.com.jastzeonictodolist.view.model.TodoEditViewModel" />
 
 
-        <import type="android.support.v7.app.AppCompatActivity" />
+        <import type="androidx.appcompat.app.AppCompatActivity" />
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".TodoEditActivity">
@@ -92,5 +92,5 @@
             tools:ignore="ContentDescription" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

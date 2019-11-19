@@ -1,11 +1,11 @@
 package jastzeonic.com.jastzeonictodolist.view
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import jastzeonic.com.jastzeonictodolist.R
 
-class TodoViewHolder(view: View, adapterOnClickListener: TodoListAdapter.AdapterOnClickListener) : RecyclerView.ViewHolder(view) {
+class TodoViewHolder(view: View, adapterOnClickListener: TodoListAdapter.AdapterOnClickListener) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
 
     val todoContent: TextView = view.findViewById(R.id.todo_content)
@@ -16,10 +16,10 @@ class TodoViewHolder(view: View, adapterOnClickListener: TodoListAdapter.Adapter
             adapterOnClickListener.onClick(adapterPosition)
 
         }
-        view.setOnLongClickListener({
+        view.setOnLongClickListener {
             adapterOnClickListener.onItemLongClick(adapterPosition)
             true
-        })
+        }
     }
 
 

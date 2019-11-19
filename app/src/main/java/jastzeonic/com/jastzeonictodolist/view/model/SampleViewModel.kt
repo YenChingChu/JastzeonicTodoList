@@ -1,9 +1,9 @@
 package jastzeonic.com.jastzeonictodolist.view.model
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import android.database.Observable
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 
 class SampleViewModel(application: Application) : AndroidViewModel(application) {
 

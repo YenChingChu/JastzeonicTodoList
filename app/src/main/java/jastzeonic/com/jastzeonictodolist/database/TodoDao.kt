@@ -1,6 +1,6 @@
 package jastzeonic.com.jastzeonictodolist.database
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 
 @Dao

@@ -1,16 +1,16 @@
 package jastzeonic.com.jastzeonictodolist.view
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import jastzeonic.com.jastzeonictodolist.TodoEditActivity
 import jastzeonic.com.jastzeonictodolist.R
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 
-class TodoListAdapter(private val context: Context) : RecyclerView.Adapter<TodoViewHolder>() {
+class TodoListAdapter(private val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<TodoViewHolder>() {
 
 
     val onDeleteEvent = MutableLiveData<Long>()

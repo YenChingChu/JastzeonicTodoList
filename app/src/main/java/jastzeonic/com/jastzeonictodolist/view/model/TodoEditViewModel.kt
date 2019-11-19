@@ -1,9 +1,11 @@
 package jastzeonic.com.jastzeonictodolist.view.model
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
-import android.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableField
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import jastzeonic.com.jastzeonictodolist.RepositoryProvider
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 import jastzeonic.com.jastzeonictodolist.model.TodoRepository
@@ -19,6 +21,9 @@ class TodoEditViewModel(application: Application) : AndroidViewModel(application
     val description = ObservableField<String>()
     var todoId = -1L
 
+
+    var compositeDisposable = CompositeDisposable()
+
     fun getTodoModel(id: Long) {
 
         repo.getItemById(id).subscribe({ todoModel ->
@@ -28,7 +33,7 @@ class TodoEditViewModel(application: Application) : AndroidViewModel(application
                 description.set(todoModel.todoDescription)
             }
 
-        }, {})
+        }, {}).addTo(compositeDisposable)
 
     }
 
@@ -39,12 +44,15 @@ class TodoEditViewModel(application: Application) : AndroidViewModel(application
         if (content.get() != null && description.get() != null) {
             model.todoContent = content.get()!!
             model.todoDescription = description.get()!!
+            if (todoId != -1L) {
+                model.id = todoId
+            }
         } else {
             return
         }
 
 
-        repo.insert(model).subscribe({ onSuccess -> onInsertEvent.value = onSuccess > 0 }, { onError -> })
+        repo.insert(model).subscribe({ onSuccess -> onInsertEvent.value = onSuccess > 0 }, { onError -> }).addTo(compositeDisposable)
     }
 
     fun deleteTodoModel() {
@@ -56,7 +64,13 @@ class TodoEditViewModel(application: Application) : AndroidViewModel(application
         model.id = todoId
 
         repo.delete(model).subscribe({ onSuccess -> onDeleteEvent.value = onSuccess > 0 }, {})
+                .addTo(compositeDisposable)
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 

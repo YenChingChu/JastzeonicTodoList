@@ -2,12 +2,10 @@ package jastzeonic.com.jastzeonictodolist
 
 import android.app.Application
 import android.content.Context
-import android.support.annotation.WorkerThread
 
 
 class RepositoryProvider {
 
-    interface Repository
 
     interface DatabaseRepository {
         fun init(applicationContext: Context?)
@@ -25,7 +23,7 @@ class RepositoryProvider {
                 result.init(applicationContext)
                 repositoryStore[DEFAULT_KEY + ":" + modelClass.canonicalName] = result
             } else {
-                throw IllegalStateException("Database already init. why are you do that again?") as Throwable
+                throw IllegalStateException("Database already init. why are you do that again?")
             }
 
 

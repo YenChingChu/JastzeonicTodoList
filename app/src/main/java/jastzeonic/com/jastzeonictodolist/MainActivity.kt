@@ -1,16 +1,15 @@
 package jastzeonic.com.jastzeonictodolist
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.BindingAdapter
-import android.databinding.DataBindingUtil
-import android.databinding.Observable
-import android.databinding.ObservableField
-import android.support.v7.app.AppCompatActivity
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import jastzeonic.com.jastzeonictodolist.databinding.ActivityMainBinding
 import jastzeonic.com.jastzeonictodolist.model.TodoModel
 import jastzeonic.com.jastzeonictodolist.view.TodoListAdapter
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.todoList.adapter = adapter
 
         adapter.onClickEvent.observe(this, Observer { id ->
-            val intent = Intent(MainActivity@ this, TodoEditActivity::class.java)
+            val intent = Intent(this, TodoEditActivity::class.java)
             intent.putExtra(TodoEditActivity.TODO_ITEM_ID, id)
             startActivity(intent)
         })
@@ -73,10 +72,10 @@ class MainActivity : AppCompatActivity() {
         todoListViewModel.getTodoList()
 
 
-        add_button.setOnClickListener({
-            val intent = Intent(MainActivity@ this, TodoEditActivity::class.java)
+        add_button.setOnClickListener {
+            val intent = Intent(this, TodoEditActivity::class.java)
             startActivity(intent)
-        })
+        }
     }
 
 

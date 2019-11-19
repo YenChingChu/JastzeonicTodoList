@@ -1,6 +1,6 @@
 package jastzeonic.com.jastzeonictodolist.model
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import android.os.AsyncTask
 import io.reactivex.Flowable
@@ -22,12 +22,12 @@ class TodoRepository : RepositoryProvider.DatabaseRepository {
             return
         }
 
-        AsyncTask.execute({
+        AsyncTask.execute {
             todoDatabase = Room.databaseBuilder(applicationContext, TodoDatabase::class.java, TodoDatabase.DATABASE_NAME)
                     .addMigrations(TodoDatabase.MIGRATION_1_2, TodoDatabase.MIGRATION_2_3)
                     .build()
             todoDao = todoDatabase.getTodoDao()
-        })
+        }
 
 
     }
@@ -35,31 +35,31 @@ class TodoRepository : RepositoryProvider.DatabaseRepository {
 
     fun getAll(): Flowable<List<TodoModel>> {
 
-        return Flowable.fromCallable({ todoDao.getAll() })
+        return Flowable.fromCallable { todoDao.getAll() }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
 
     fun getItemById(id: Long): Flowable<TodoModel> {
-        return Flowable.fromCallable({ todoDao.queryById(id) })
+        return Flowable.fromCallable { todoDao.queryById(id) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
     }
 
     fun insert(item: TodoModel): Flowable<Long> {
-        return Flowable.fromCallable({
+        return Flowable.fromCallable {
             todoDao.insert(item)
-        })
+        }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun delete(item: TodoModel): Flowable<Int> {
-        return Flowable.fromCallable({
+        return Flowable.fromCallable {
             todoDao.delete(item)
-        })
+        }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
