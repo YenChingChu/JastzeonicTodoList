@@ -7,7 +7,9 @@ class TodoListApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         RepositoryProvider.initDatabase(TodoRepository::class.java, this)
+
     }
 
 }

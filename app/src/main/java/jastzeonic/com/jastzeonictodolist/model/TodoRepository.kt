@@ -2,7 +2,6 @@ package jastzeonic.com.jastzeonictodolist.model
 
 import androidx.room.Room
 import android.content.Context
-import android.os.AsyncTask
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,18 +15,16 @@ class TodoRepository : RepositoryProvider.DatabaseRepository {
     private lateinit var todoDao: TodoDao
     private lateinit var todoDatabase: TodoDatabase
 
-    override fun init(applicationContext: Context?) {
+    override suspend fun init(applicationContext: Context?) {
 
         if (applicationContext == null) {
             return
         }
 
-        AsyncTask.execute {
-            todoDatabase = Room.databaseBuilder(applicationContext, TodoDatabase::class.java, TodoDatabase.DATABASE_NAME)
-                    .addMigrations(TodoDatabase.MIGRATION_1_2, TodoDatabase.MIGRATION_2_3)
-                    .build()
-            todoDao = todoDatabase.getTodoDao()
-        }
+        todoDatabase = Room.databaseBuilder(applicationContext, TodoDatabase::class.java, TodoDatabase.DATABASE_NAME)
+                .addMigrations(TodoDatabase.MIGRATION_1_2, TodoDatabase.MIGRATION_2_3)
+                .build()
+        todoDao = todoDatabase.getTodoDao()
 
 
     }

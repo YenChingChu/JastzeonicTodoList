@@ -2,13 +2,16 @@ package jastzeonic.com.jastzeonictodolist
 
 import android.app.Application
 import android.content.Context
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class RepositoryProvider {
 
 
     interface DatabaseRepository {
-        fun init(applicationContext: Context?)
+        suspend fun init(applicationContext: Context?)
     }
 
     companion object {
@@ -20,8 +23,10 @@ class RepositoryProvider {
             var result = repositoryStore[DEFAULT_KEY + ":" + modelClass.canonicalName]
             if (result == null) {
                 result = modelClass.newInstance()
-                result.init(applicationContext)
-                repositoryStore[DEFAULT_KEY + ":" + modelClass.canonicalName] = result
+                GlobalScope.launch(Dispatchers.IO) {
+                    result.init(applicationContext)
+                    repositoryStore[DEFAULT_KEY + ":" + modelClass.canonicalName] = result
+                }
             } else {
                 throw IllegalStateException("Database already init. why are you do that again?")
             }
